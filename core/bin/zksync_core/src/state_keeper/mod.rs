@@ -37,8 +37,10 @@ use crate::{
 pub use self::{
     init_params::ZkSyncStateInitParams,
     root_hash_calculator::{start_root_hash_calculator, BlockRootHashJobQueue},
-    types::StateKeeperTestkitRequest,
 };
+
+#[cfg(feature = "testkit")]
+pub use self::types::StateKeeperTestkitRequest;
 
 mod init_params;
 mod pending_block;

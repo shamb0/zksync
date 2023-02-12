@@ -1,7 +1,7 @@
 use actix_cors::Cors;
 use actix_web::{web, App, HttpResponse, HttpServer};
 use futures::channel::mpsc;
-use std::net::SocketAddr;
+use std::{net::SocketAddr, time::Duration};
 use zksync_storage::ConnectionPool;
 use zksync_types::{SequentialTxId, H160};
 
@@ -69,17 +69,14 @@ async fn start_server(
             .service(forced_exit_requests_api_scope)
             .service(api_v02_scope)
             // Endpoint needed for js isReachable
-            .route(
-                "/favicon.ico",
-                web::get().to(|| HttpResponse::Ok().finish()),
-            )
+            .route("/favicon.ico", web::get().to(HttpResponse::Ok))
     })
     .workers(super::THREADS_PER_SERVER)
     .bind(bind_to)
     .unwrap()
     .shutdown_timeout(60)
-    .keep_alive(10)
-    .client_timeout(60000)
+    .keep_alive(Duration::from_secs(10))
+    .client_request_timeout(Duration::from_secs(60000))
     .run()
     .await
     .expect("REST API server has crashed");

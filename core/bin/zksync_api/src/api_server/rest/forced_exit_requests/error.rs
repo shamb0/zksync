@@ -2,7 +2,7 @@
 use std::fmt::{self, Display};
 
 // External uses
-use actix_web::{dev::Body, http::HeaderValue, HttpResponse, ResponseError};
+use actix_web::{body::BoxBody, http::header::HeaderValue, HttpResponse, ResponseError};
 use reqwest::{header::CONTENT_TYPE, StatusCode};
 
 // Workspace uses
@@ -66,11 +66,11 @@ impl ResponseError for ApiError {
     fn error_response(&self) -> actix_web::HttpResponse {
         let mut resp = HttpResponse::new(self.status_code());
 
-        match serde_json::to_vec_pretty(&self.body) {
+        match serde_json::to_string(&self.body) {
             Ok(body) => {
                 resp.headers_mut()
                     .insert(CONTENT_TYPE, HeaderValue::from_static("application/json"));
-                resp.set_body(Body::from_slice(&body))
+                resp.set_body(BoxBody::new(body))
             }
 
             Err(err) => err.error_response(),

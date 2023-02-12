@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use std::convert::From;
 
 // External uses
-use actix_web::{web::Data, HttpRequest, HttpResponse, Responder};
+use actix_web::{body::BoxBody, web::Data, HttpRequest, HttpResponse, Responder};
 use chrono::Utc;
 use qstring::QString;
 use serde::{Deserialize, Serialize};
@@ -24,7 +24,8 @@ pub enum ApiResult<R: Serialize> {
 }
 
 impl<R: Serialize> Responder for ApiResult<R> {
-    fn respond_to(self, req: &HttpRequest) -> HttpResponse {
+    type Body = BoxBody;
+    fn respond_to(self, req: &HttpRequest) -> HttpResponse<Self::Body> {
         let data = req
             .app_data::<Data<SharedData>>()
             .expect("Wrong app data type");
@@ -64,7 +65,7 @@ impl<R: Serialize> Responder for ApiResult<R> {
 
         HttpResponse::Ok()
             .content_type("application/json")
-            .body(body)
+            .body(BoxBody::new(body))
     }
 }
 

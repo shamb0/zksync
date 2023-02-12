@@ -1,7 +1,7 @@
 use std::str::FromStr;
 
-use bigdecimal::BigDecimal;
-use num::{bigint::ToBigInt, rational::Ratio, BigUint};
+use bigdecimal::{num_bigint::ToBigInt, BigDecimal};
+use num::{rational::Ratio, BigUint};
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
 use crate::convert::*;

@@ -119,10 +119,10 @@ impl TokenPriceAPI for CoinGeckoAPI {
         let usd_price = usd_price
             .ok_or_else(|| PriceError::api_error("CoinGecko returned empty price data"))?;
 
-        let naive_last_updated = NaiveDateTime::from_timestamp(
+        let naive_last_updated = NaiveDateTime::from_timestamp_opt(
             last_updated_timestamp_ms / 1_000,                      // ms to s
             (last_updated_timestamp_ms % 1_000) as u32 * 1_000_000, // ms to ns
-        );
+        ).unwrap();
         let last_updated = DateTime::<Utc>::from_utc(naive_last_updated, Utc);
         metrics::histogram!("ticker.coingecko.request", start.elapsed());
         Ok(TokenPrice {

@@ -16,7 +16,7 @@ db_test = []
 [dependencies]
 vlog = { path = "../../lib/vlog", version = "1.0" }
 
-num = { version = "0.3.1", features = ["serde"] }
+num = { version = "0.4.0", features = ["serde"] }
 tiny-keccak = "1.4.2"
 ethabi = "16.0.0"
 web3 = "0.18.0"

@@ -17,7 +17,7 @@ zksync_eth_signer = { path = "../../lib/eth_signer", version = "1.0" }
 vlog = { path = "../../lib/vlog", version = "1.0" }
 
 serde = { version = "1.0", features = ["derive"] }
-num = { version = "0.3.1", features = ["serde"] }
+num = { version = "0.4.0", features = ["serde"] }
 tokio = { version = "1", features = ["full"] }
 futures = "0.3"
 anyhow = "1.0"

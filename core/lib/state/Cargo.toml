@@ -14,7 +14,7 @@ zksync_crypto = { path = "../crypto", version = "1.0" }
 zksync_utils = { path = "../utils", version = "1.0" }
 zksync_types = { path = "../types", version = "1.0" }
 
-num = { version = "0.3.1", features = ["serde"] }
+num = { version = "0.4.0", features = ["serde"] }
 vlog = { path = "../../lib/vlog", version = "1.0" }
 thiserror = "1.0"
 metrics = "0.17"

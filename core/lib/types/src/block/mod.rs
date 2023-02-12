@@ -490,7 +490,7 @@ impl Block {
     }
 
     pub fn timestamp_utc(&self) -> DateTime<Utc> {
-        Utc.timestamp(self.timestamp as i64, 0)
+        Utc.timestamp_opt(self.timestamp as i64, 0).unwrap()
     }
 
     pub fn elapsed(&self) -> Duration {

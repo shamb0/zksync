@@ -104,11 +104,12 @@ impl<'a> AuthTokenValidator<'a> {
         &self,
         req: ServiceRequest,
         credentials: BearerAuth,
-    ) -> actix_web::Result<ServiceRequest> {
+    ) -> actix_web::Result<ServiceRequest, (actix_web::Error, ServiceRequest)> {
         let config = req.app_data::<Config>().cloned().unwrap_or_default();
 
-        self.validate_auth_token(credentials.token())
-            .map_err(|_| AuthenticationError::from(config))?;
+        if self.validate_auth_token(credentials.token()).is_err() {
+            return Err((AuthenticationError::from(config).into(), req));
+        }
 
         Ok(req)
     }

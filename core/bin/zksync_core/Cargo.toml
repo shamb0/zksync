@@ -29,7 +29,7 @@ zksync_prometheus_exporter = { path = "../../lib/prometheus_exporter", version =
 zksync_balancer = { path = "../../lib/balancer", version = "1.0" }
 zksync_gateway_watcher = { path = "../../lib/gateway_watcher", version = "1.0" }
 
-num = { version = "0.3.1", features = ["serde"] }
+num = { version = "0.4.0", features = ["serde"] }
 
 ethabi = "16.0.0"
 web3 = "0.18.0"
@@ -43,7 +43,7 @@ vlog = { path = "../../lib/vlog", version = "1.0" }
 tokio = { version = "1", features = ["time"] }
 futures = "0.3"
 actix-rt = "2.2.0"
-actix-web = "4.0.0-beta.8"
+actix-web = { version = "4.3.0" }
 reqwest = { version = "0.11", features = ["blocking", "json"] }
 chrono = { version = "0.4", features = ["serde", "rustc-serialize"] }
 ctrlc = { version = "3.1", features = ["termination"] }
@@ -53,8 +53,7 @@ tiny-keccak = "1.4.2"
 async-trait = "0.1"
 
 [dev-dependencies]
-num = { version = "0.3.1", features = ["serde"] }
+num = { version = "0.4.0", features = ["serde"] }
 
 [features]
 testkit = []
-

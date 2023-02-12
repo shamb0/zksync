@@ -114,8 +114,8 @@ fn token_amount_to_usd(amount: BigUint, decimals: u8, usd_price: Ratio<BigUint>)
 pub fn run_prometheus_exporter(port: u16) -> JoinHandle<()> {
     let addr = ([0, 0, 0, 0], port);
     let (recorder, exporter) = PrometheusBuilder::new()
-        .listen_address(addr)
-        .build_with_exporter()
+        .with_http_listener(addr)
+        .build()
         .expect("failed to install Prometheus recorder");
     metrics::set_boxed_recorder(Box::new(recorder)).expect("failed to set metrics recorder");
 

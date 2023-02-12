@@ -54,7 +54,7 @@ pub async fn run_event_server(config: ZkSyncConfig) {
     .run();
     // Send the server handle to the monitor.
     monitor
-        .send(RegisterServerHandle(server.clone()))
+        .send(RegisterServerHandle(server.handle()))
         .await
         .unwrap();
     server.await.unwrap();
